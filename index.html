@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hand writing sheet</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+    <style>
+      .sheet {
+      }
+      .guideline {
+        font-family: 'Raleway Dots', cursive;
+        text-align: center;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        font-size: 100px;
+        height: 80px;
+        line-height: 80px;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 40px;
+        overflow: hidden;
+      }
+      .guideline:before {
+        border-top: 1px dashed black;
+        transform: scaleX(5.0) translateX(40%);
+        -ms-transform: scaleX(5.0) translateX(40%);
+        content: "";
+        margin: 0 auto;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 20%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .all-caps {
+        text-transform: uppercase;
+      }
+
+      .main-input {
+        font-size: 30px;
+      }
+
+      .controls {
+        margin-bottom: 40px;
+      }
+
+      @media print {
+        .controls {
+          display: none;
+        }
+
+        .sheet {
+          margin: 1in 0;
+        }
+      }
+
+      @media screen {
+        .sheet {
+          max-width: 720px;
+          margin: 0 auto;
+        }
+      }
+
+    </style>
+
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+
+    <script>
+      $(document).ready(function() {
+        var Model = function Model(text) {
+          this.observers = [];
+          this.text = text;
+          this.spacing = true;
+          this.allcaps = true
+        };
+
+        Model.prototype.setText = function(text) {
+          this.text = text;
+          this.notifyObservers();
+        };
+
+        Model.prototype.setSpacing = function(spacing) {
+          this.spacing = spacing;
+          this.notifyObservers();
+        };
+
+        Model.prototype.setAllcaps = function(allcaps) {
+          this.allcaps = allcaps;
+          this.notifyObservers();
+        };
+
+        Model.prototype.notifyObservers = function() {
+          for(var i = 0; i < this.observers.length; i++) {
+            this.observers[i](this);
+          }
+        };
+
+        Model.prototype.registerObserver = function(observer) {
+          this.observers.push(observer);
+        };
+
+        var ControlsView = function ControlsView(el, model) {
+          this.model = model;
+
+          this.$el = el;
+          this.$input = el.find("[name='line-text']");
+          this.$spacing = el.find("[name='wide-spacing']");
+          this.$allcaps = el.find("[name='all-caps']");
+
+          this.$input.on("keyup", $.proxy(this.inputChanged, this));
+          this.$spacing.on("change", $.proxy(this.spacingChanged, this));
+          this.$allcaps.on("change", $.proxy(this.allcapsChanged, this));
+        };
+
+        ControlsView.prototype.inputChanged = function() {
+          var val = this.$input.val();
+          this.model.setText(val);
+        };
+
+        ControlsView.prototype.spacingChanged = function() {
+          var val = this.$spacing.prop('checked');
+          this.model.setSpacing(val);
+        };
+
+        ControlsView.prototype.allcapsChanged = function() {
+          var val = this.$allcaps.prop('checked');
+          this.model.setAllcaps(val);
+        };
+
+        ControlsView.prototype.render = function() {
+          this.$input.val(this.model.text);
+          this.$spacing.prop('checked', this.model.spacing);
+          this.$allcaps.prop('checked', this.model.allcaps);
+        };
+
+        var SheetView = function SheetView(el, model) {
+          this.model = model;
+          this.model.registerObserver($.proxy(this.render, this));
+
+          this.$el = el;
+          this.$guidelines = el.find(".guideline");
+        };
+
+        SheetView.prototype.render = function() {
+          this.$el.toggleClass("all-caps", this.model.allcaps);
+
+          var text = this.displayText();
+          this.$guidelines.each(function() {
+            $(this).html(text);
+          });
+        };
+
+        SheetView.prototype.displayText = function() {
+          var text = this.model.text;
+          if(this.model.spacing) {
+            text = text.split("").join("&nbsp;");
+          }
+          text = text.replace(/ /g, "&nbsp;");
+          return text;
+        };
+
+        var model = new Model("ABCDEFGH");
+        var controls = new ControlsView($(".controls"), model);
+        var sheet = new SheetView($(".sheet"), model);
+
+        controls.render();
+        sheet.render();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="controls">
+      <h1>Hand writing sheet</h1>
+      <p>Enter some text below to get copies on many lines. Then hit
+      Print!</p>
+      <input name="line-text" class="main-input"></input>
+      <label><input type="checkbox" name="wide-spacing">Wide spacing between letters</label>
+      <label><input type="checkbox" name="all-caps">All caps</label>
+    </div>
+    <div class="sheet">
+      <div class="guideline"></div>
+      <div class="guideline"></div>
+      <div class="guideline"></div>
+      <div class="guideline"></div>
+      <div class="guideline"></div>
+      <div class="guideline"></div>
+    </div>
+
+  </body>
+</html>
+
