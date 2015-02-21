@@ -3,38 +3,60 @@
   <head>
     <title>Hand writing sheet</title>
     <link href='http://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+    (function() {
+        var path = '//easy.myfonts.net/v2/js?sid=231863(font-family=KG+Primary+Dots)&sid=231864(font-family=KG+Primary+Dots+Lined)&key=zQNKGH42qE',
+            protocol = ('https:' == document.location.protocol ? 'https:' : 'http:'),
+            trial = document.createElement('script');
+        trial.type = 'text/javascript';
+        trial.async = true;
+        trial.src = protocol + path;
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(trial);
+    })();
+</script>
+
     <style>
-      .sheet {
+      #mfPreviewBar {
+        display: none;
       }
+      .sheet {
+        letter-spacing: 0.5em;
+      }
+      .wide-spacing {
+        letter-spacing: 1.5em;
+      }
+
+      .all-caps {
+        text-transform: uppercase;
+      }
+
       .guideline {
-        font-family: 'Raleway Dots', cursive;
+        font-family: 'KG Primary Dots', sans-serif;
         text-align: center;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border-top: 1px solid #333;
         font-size: 100px;
         height: 80px;
-        line-height: 80px;
+        line-height: 70px;
         position: relative;
         z-index: 1;
         margin-bottom: 40px;
         overflow: hidden;
       }
       .guideline:before {
-        border-top: 1px dashed black;
+        border-top: 1px dashed #333;
+        border-bottom: 1px solid #333;
         transform: scaleX(5.0) translateX(40%);
         -ms-transform: scaleX(5.0) translateX(40%);
         content: "";
         margin: 0 auto;
         position: absolute;
-        top: 40px;
+        top: 30px;
         left: 0;
         width: 20%;
+        height: 33px;
         z-index: -1;
         overflow: hidden;
-      }
-
-      .all-caps {
-        text-transform: uppercase;
       }
 
       .main-input {
@@ -42,6 +64,7 @@
       }
 
       .controls {
+        text-align: center;
         margin-bottom: 40px;
       }
 
@@ -181,6 +204,7 @@
 
         SheetView.prototype.render = function() {
           this.$el.toggleClass("all-caps", this.model.allcaps);
+          this.$el.toggleClass("wide-spacing", this.model.spacing);
 
           var text = this.displayText();
           var numlines = this.model.numlines;
@@ -191,9 +215,6 @@
 
         SheetView.prototype.displayText = function() {
           var text = this.model.text;
-          if(this.model.spacing) {
-            text = text.split("").join("&nbsp;");
-          }
           text = text.replace(/ /g, "&nbsp;");
           return text;
         };
@@ -216,17 +237,19 @@
       <p>Enter some text below to get copies on many lines. Then hit
       Print!</p>
       <input name="line-text" class="main-input"></input>
-      <label><input type="checkbox" name="wide-spacing">Wide spacing between letters</label>
-      <label><input type="checkbox" name="all-caps">All caps</label>
-      <label><input type="number" name="num-lines" min="1" max="6" value="6">Repeated lines</label>
+      <div class="row">
+        <label><input type="checkbox" name="wide-spacing">Wide spacing between letters</label>
+        <label><input type="checkbox" name="all-caps">All caps</label>
+        <label><input type="number" name="num-lines" min="1" max="6" value="6">Repeated lines</label>
+      </div>
     </div>
     <div class="sheet">
-      <div class="guideline"></div>
-      <div class="guideline"></div>
-      <div class="guideline"></div>
-      <div class="guideline"></div>
-      <div class="guideline"></div>
-      <div class="guideline"></div>
+      <div class="guideline" contenteditable="true"></div>
+      <div class="guideline" contenteditable="true"></div>
+      <div class="guideline" contenteditable="true"></div>
+      <div class="guideline" contenteditable="true"></div>
+      <div class="guideline" contenteditable="true"></div>
+      <div class="guideline" contenteditable="true"></div>
     </div>
 
   </body>
