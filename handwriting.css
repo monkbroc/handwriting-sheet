@@ -2,9 +2,12 @@
   display: none;
 }
 .sheet {
+  position: relative;
+}
+.sheet .guideline {
   letter-spacing: 10px;
 }
-.wide-spacing {
+.sheet.wide-spacing .guideline {
   letter-spacing: 30px;
 }
 
@@ -23,6 +26,7 @@
   z-index: 1;
   margin-bottom: 40px;
   overflow: hidden;
+  cursor: text;
 }
 .guideline:before {
   border-top: 1px dashed #333;
@@ -40,6 +44,52 @@
   overflow: hidden;
 }
 
+.write-here {
+  position: absolute;
+  left: -190px;
+  width: 150px;
+  height: 100px;
+  top: -36px;
+}
+.write-here .instructions {
+  padding: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #ddf8c6;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.arrow_box {
+	position: relative;
+	background: #88b7d5;
+	border: 4px solid #c2e1f5;
+}
+.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: #88b7d5;
+	border-width: 20px;
+	margin-top: -20px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #c2e1f5;
+	border-width: 26px;
+	margin-top: -26px;
+}
+
+
 .main-input {
   font-size: 30px;
 }
@@ -56,6 +106,10 @@
 
   .sheet {
     margin: 1in 0;
+  }
+
+  .write-here {
+    display: none;
   }
 }
 

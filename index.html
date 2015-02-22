@@ -8,32 +8,34 @@
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js'></script>
 
-    <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.1/underscore-min.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js'></script>
+	<!-- TODO: add -min.js for production -->
+    <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.1/underscore.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage.js'></script>
+
 	<script src='//easy.myfonts.net/v2/js?sid=231863(font-family=KG+Primary+Dots)&sid=231864(font-family=KG+Primary+Dots+Lined)&key=zQNKGH42qE'></script>
 	<script src='handwriting.js'></script>
   </head>
   <body>
-    <div class="controls">
+    <section class="controls">
       <h1>Hand writing sheet</h1>
       <p>Enter some text below to get copies on many lines. Then hit
       Print!</p>
-      <input name="line-text" class="main-input"></input>
       <div class="row">
         <label><input type="checkbox" name="wide-spacing">Wide spacing between letters</label>
         <label><input type="checkbox" name="all-caps">All caps</label>
         <label><input type="number" name="num-lines" min="1" max="6" value="6">Repeated lines</label>
       </div>
-    </div>
-    <div class="sheet">
+    </section>
+    <section class="sheet">
+    <div class="write-here"><div class="arrow_box"><div class="instructions">Write here!</div></div></div>
       <div class="guideline" contenteditable="true"></div>
       <div class="guideline" contenteditable="true"></div>
       <div class="guideline" contenteditable="true"></div>
       <div class="guideline" contenteditable="true"></div>
       <div class="guideline" contenteditable="true"></div>
       <div class="guideline" contenteditable="true"></div>
-    </div>
+    </section>
 
   </body>
 </html>

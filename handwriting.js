@@ -1,13 +1,78 @@
 $(document).ready(function() {
-  var Controls = Backbone.Model.extend({
-    wideSpacing: true,
-    allCaps: true,
-    mode: 'singleLine'
+
+  /* === Models === */
+
+  var EditorState = Backbone.Model.extend({
+    defaults: {
+      wideSpacing: true,
+      allCaps: true,
+      mode: 'singleLine',
+    },
+
+    localStorage: new Backbone.LocalStorage("EditorState"),
   });
 
   var Text = Backbone.Model.extend({
     lines: ['ABC'],
   });
+
+  /* === Views === */
+
+  var ControlsView =  Backbone.View.extend({
+    /* Pass in model and el to constructor */
+    events: {
+      'change [name="wide-spacing"]': 'wideSpacingChanged',
+      'change [name="all-caps"]': 'allCapsChanged',
+      'change [name="mode"]': 'modeChanged',
+    },
+
+    initialize: function() {
+      this.listenTo(this.model, "change", this.render);
+
+      this.$wideSpacing = this.$("[name='wide-spacing']");
+      this.$allCaps = this.$("[name='all-caps']");
+      this.$mode = this.$("[name='mode']");
+    },
+
+    wideSpacingChanged: function(event) {
+      var val = this.$wideSpacing.prop('checked');
+      this.model.save('wideSpacing', val);
+    },
+
+    allCapsChanged: function(event) {
+      var val = this.$allCaps.prop('checked');
+      this.model.save('allCaps', val);
+    },
+
+    modeChanged: function(event) {
+      var val = this.$mode.val();
+      this.model.save('model', mode);
+    },
+
+    render: function() {
+      this.$wideSpacing.prop('checked', this.model.get('wideSpacing'));
+      this.$allCaps.prop('checked', this.model.get('allCaps'));
+      this.$mode.val(this.model.get('mode'));
+
+      return this;
+    },
+  });
+  
+
+  /* === Application start === */
+
+  var editorState = new EditorState();
+  var controls = new ControlsView({
+    model: editorState,
+    el: $(".controls")
+  });
+
+  editorState.fetch();
+
+  controls.render();
+
+
+  /* Old */
 
   var Model = function Model(text) {
     this.observers = [];
@@ -69,7 +134,7 @@ $(document).ready(function() {
     }
   };
 
-  var ControlsView = function ControlsView(el, model) {
+  var ControlsViewOld = function ControlsViewOld(el, model) {
     this.model = model;
 
     this.$el = el;
@@ -84,27 +149,27 @@ $(document).ready(function() {
     this.$numlines.on("change", $.proxy(this.numlinesChanged, this));
   };
 
-  ControlsView.prototype.inputChanged = function() {
+  ControlsViewOld.prototype.inputChanged = function() {
     var val = this.$input.val();
     this.model.set('text', val);
   };
 
-  ControlsView.prototype.spacingChanged = function() {
+  ControlsViewOld.prototype.spacingChanged = function() {
     var val = this.$spacing.prop('checked');
     this.model.set('spacing', val);
   };
 
-  ControlsView.prototype.allcapsChanged = function() {
+  ControlsViewOld.prototype.allcapsChanged = function() {
     var val = this.$allcaps.prop('checked');
     this.model.set('allcaps', val);
   };
 
-  ControlsView.prototype.numlinesChanged = function() {
+  ControlsViewOld.prototype.numlinesChanged = function() {
     var val = +this.$numlines.val();
     this.model.set('numlines', val);
   };
 
-  ControlsView.prototype.render = function() {
+  ControlsViewOld.prototype.render = function() {
     this.$input.val(this.model.text);
     this.$spacing.prop('checked', this.model.spacing);
     this.$allcaps.prop('checked', this.model.allcaps);
@@ -137,13 +202,13 @@ $(document).ready(function() {
   };
 
   var model = new Model("ABC 123");
-  var controls = new ControlsView($(".controls"), model);
+  //var controls = new ControlsViewOld($(".controls"), model);
   var sheet = new SheetView($(".sheet"), model);
   var persistence = new Persistence(model);
 
   persistence.loadModel();
 
-  controls.render();
+  //controls.render();
   sheet.render();
 });
 
