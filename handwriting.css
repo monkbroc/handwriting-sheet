@@ -1,0 +1,70 @@
+#mfPreviewBar {
+  display: none;
+}
+.sheet {
+  letter-spacing: 10px;
+}
+.wide-spacing {
+  letter-spacing: 30px;
+}
+
+.all-caps {
+  text-transform: uppercase;
+}
+
+.guideline {
+  font-family: 'KG Primary Dots', sans-serif;
+  text-align: center;
+  border-top: 1px solid #333;
+  font-size: 100px;
+  height: 80px;
+  line-height: 70px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+.guideline:before {
+  border-top: 1px dashed #333;
+  border-bottom: 1px solid #333;
+  transform: scaleX(5.0) translateX(40%);
+  -ms-transform: scaleX(5.0) translateX(40%);
+  content: "";
+  margin: 0 auto;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 20%;
+  height: 33px;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.main-input {
+  font-size: 30px;
+}
+
+.controls {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+@media print {
+  .controls {
+    display: none;
+  }
+
+  .sheet {
+    margin: 1in 0;
+  }
+}
+
+@media screen {
+  .sheet {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
+/* vim: sw=2 expandtab
+ */
