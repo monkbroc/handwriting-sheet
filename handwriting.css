@@ -11,7 +11,7 @@
   letter-spacing: 30px;
 }
 
-.all-caps {
+.all-caps .guideline {
   text-transform: uppercase;
 }
 
@@ -26,6 +26,9 @@
   z-index: 1;
   margin-bottom: 40px;
   overflow: hidden;
+  cursor: default;
+}
+.guideline[contenteditable="true"] {
   cursor: text;
 }
 .guideline:before {
@@ -46,18 +49,46 @@
 
 .write-here {
   position: absolute;
-  left: -190px;
-  width: 150px;
-  height: 100px;
-  top: -36px;
+  left: -180px;
+  width: 140px;
+  top: -32px;
+}
+.write-here.or {
+  height: 50px;
+  top: 109px;
+}
+.write-here.on {
+  height: 50px;
+  top: 230px;
+}
+.write-here.any {
+  height: 50px;
+  top: 352px;
+}
+.write-here.other {
+  height: 50px;
+  top: 472px;
+}
+.write-here.line {
+  height: 50px;
+  top: 594px;
+}
+.sheet.single-line-mode .write-here.or,
+.sheet.single-line-mode .write-here.on,
+.sheet.single-line-mode .write-here.any,
+.sheet.single-line-mode .write-here.other,
+.sheet.single-line-mode .write-here.line
+{
+  display: none;
 }
 .write-here .instructions {
   padding: 20px;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   font-family: Helvetica, Arial, sans-serif;
   color: #ddf8c6;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 .arrow_box {

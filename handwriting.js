@@ -12,64 +12,139 @@ $(document).ready(function() {
     localStorage: new Backbone.LocalStorage("EditorState"),
   });
 
-  var Text = Backbone.Model.extend({
-    lines: ['ABC'],
+  var PracticeText = Backbone.Model.extend({
+    defaults: {
+      lines: ['ABC'],
+    },
+
+    localStorage: new Backbone.LocalStorage("PracticeText"),
   });
 
   /* === Views === */
 
   var ControlsView =  Backbone.View.extend({
-    /* Pass in model and el to constructor */
-    events: {
-      'change [name="wide-spacing"]': 'wideSpacingChanged',
-      'change [name="all-caps"]': 'allCapsChanged',
-      'change [name="mode"]': 'modeChanged',
+    /* Pass in state and el to constructor */
+    initialize: function(options) {
+       _.extend(this, options);
+      this.$wideSpacing = this.$("#wide-spacing");
+      this.$allCaps = this.$("#all-caps");
+      this.$mode = this.$("#mode");
     },
 
-    initialize: function() {
-      this.listenTo(this.model, "change", this.render);
-
-      this.$wideSpacing = this.$("[name='wide-spacing']");
-      this.$allCaps = this.$("[name='all-caps']");
-      this.$mode = this.$("[name='mode']");
+    events: {
+      'change #wide-spacing': 'wideSpacingChanged',
+      'change #all-caps': 'allCapsChanged',
+      'change #mode': 'modeChanged',
     },
 
     wideSpacingChanged: function(event) {
       var val = this.$wideSpacing.prop('checked');
-      this.model.save('wideSpacing', val);
+      this.state.save('wideSpacing', val);
     },
 
     allCapsChanged: function(event) {
       var val = this.$allCaps.prop('checked');
-      this.model.save('allCaps', val);
+      this.state.save('allCaps', val);
     },
 
     modeChanged: function(event) {
       var val = this.$mode.val();
-      this.model.save('model', mode);
+      this.state.save('mode', val);
     },
 
     render: function() {
-      this.$wideSpacing.prop('checked', this.model.get('wideSpacing'));
-      this.$allCaps.prop('checked', this.model.get('allCaps'));
-      this.$mode.val(this.model.get('mode'));
+      this.$wideSpacing.prop('checked', this.state.get('wideSpacing'));
+      this.$allCaps.prop('checked', this.state.get('allCaps'));
+      this.$mode.val(this.state.get('mode'));
 
       return this;
     },
   });
   
+  var SheetView = Backbone.View.extend({
+    /* Pass model, state and el to constructor */
+    initialize: function(options) {
+       _.extend(this, options);
+      _.bindAll(this, 'render');
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.state, 'change', this.render);
+
+      this.$guidelines = this.$(".guideline");
+      this.$firstLine = this.$guidelines.first();
+      this.$otherLines = this.$guidelines.slice(1);
+      this.$writeHere = this.$(".write-here");
+    },
+
+    events: {
+      "input .guideline": "updateLine",
+    },
+
+    updateLine: function(event) {
+      var $el = $(event.target);
+      var lineNum = this.$guidelines.index($el);
+      if(lineNum < 0) {
+        console.log("Bad line number in updateLine");
+        return;
+      }
+      var lines = _.clone(this.model.get('lines'));
+      lines[lineNum] = $el.html();
+      this.model.save('lines', lines);
+    },
+
+    render: function() {
+      this.$el.toggleClass("all-caps", this.state.get('allCaps'));
+      this.$el.toggleClass("wide-spacing", this.state.get('wideSpacing'));
+
+      var lines = this.model.get('lines');
+
+      var mode = this.state.get('mode');
+      this.$el.toggleClass("single-line-mode", mode == 'singleLine');
+      switch(mode) {
+        case 'singleLine':
+
+          this.$firstLine.attr('contenteditable', true);
+          this.$otherLines.attr('contenteditable', false);
+          this.$guidelines.html(lines[0]);
+
+          this.showWriteHere(this.$firstLine);
+          this.hideWriteHere(this.$otherLines);
+          break;
+        case 'multiLine':
+          this.$guidelines.attr('contenteditable', true);
+          this.$guidelines.each(function(line) {
+            $(this).html(lines[line]);
+          });
+          this.showWriteHere(this.$guidelines);
+          break;
+      }
+    },
+
+    showWriteHere: function($el) {
+    },
+
+    hideWriteHere: function($el) {
+    },
+  });
 
   /* === Application start === */
 
   var editorState = new EditorState();
+  var practiceText = new PracticeText();
   var controls = new ControlsView({
-    model: editorState,
+    state: editorState,
     el: $(".controls")
   });
+  var sheet = new SheetView({
+    state: editorState,
+    model: practiceText,
+    el: $(".sheet")
+  });
+
 
   editorState.fetch();
 
   controls.render();
+  sheet.render();
 
 
   /* Old */
@@ -201,15 +276,15 @@ $(document).ready(function() {
     return text;
   };
 
-  var model = new Model("ABC 123");
+  // var model = new Model("ABC 123");
   //var controls = new ControlsViewOld($(".controls"), model);
-  var sheet = new SheetView($(".sheet"), model);
-  var persistence = new Persistence(model);
+  // var sheet = new SheetView($(".sheet"), model);
+  // var persistence = new Persistence(model);
 
-  persistence.loadModel();
+  // persistence.loadModel();
 
   //controls.render();
-  sheet.render();
+  //sheet.render();
 });
 
 // vim: sw=2 expandtab

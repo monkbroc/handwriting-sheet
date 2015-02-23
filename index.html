@@ -3,11 +3,13 @@
   <head>
     <title>Hand writing sheet</title>
     <link href='http://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+	<!-- <link href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css' rel='stylesheet' type='text/css'> -->
     <link href='handwriting.css' rel='stylesheet' type='text/css'>
 
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js'></script>
 
+	<!-- <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script> -->
 	<!-- TODO: add -min.js for production -->
     <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.1/underscore.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js'></script>
@@ -21,19 +23,30 @@
       <h1>Hand writing sheet</h1>
       <p>Enter some text below to get copies on many lines. Then hit
       Print!</p>
+	  <div class="row">
+		  <select id="mode">
+			  <option value="singleLine" selected="selected">Repeat one line</option>
+			  <option value="multiLine">Each line is different</option>
+		  </select>
+	  </div>
       <div class="row">
-        <label><input type="checkbox" name="wide-spacing">Wide spacing between letters</label>
-        <label><input type="checkbox" name="all-caps">All caps</label>
-        <label><input type="number" name="num-lines" min="1" max="6" value="6">Repeated lines</label>
+        <label><input type="checkbox" id="wide-spacing">Wide spacing between letters</label>
+        <label><input type="checkbox" id="all-caps">All caps</label>
+        <label><input type="number" id="num-lines" min="1" max="6" value="6">Repeated lines</label>
       </div>
     </section>
     <section class="sheet">
-    <div class="write-here"><div class="arrow_box"><div class="instructions">Write here!</div></div></div>
+      <div class="write-here first"><div class="arrow_box"><div class="instructions">Write here!</div></div></div>
       <div class="guideline" contenteditable="true"></div>
+      <div class="write-here or"><div class="arrow_box"><div class="instructions">Or</div></div></div>
       <div class="guideline" contenteditable="true"></div>
+      <div class="write-here on"><div class="arrow_box"><div class="instructions">on</div></div></div>
       <div class="guideline" contenteditable="true"></div>
+      <div class="write-here any"><div class="arrow_box"><div class="instructions">any</div></div></div>
       <div class="guideline" contenteditable="true"></div>
+      <div class="write-here other"><div class="arrow_box"><div class="instructions">other</div></div></div>
       <div class="guideline" contenteditable="true"></div>
+      <div class="write-here line"><div class="arrow_box"><div class="instructions">line</div></div></div>
       <div class="guideline" contenteditable="true"></div>
     </section>
 
