@@ -25,7 +25,7 @@
   position: relative;
   z-index: 1;
   margin-bottom: 40px;
-  overflow: hidden;
+  overflow: visible;
   cursor: default;
 }
 .guideline[contenteditable="true"] {
@@ -39,12 +39,11 @@
   content: "";
   margin: 0 auto;
   position: absolute;
-  top: 30px;
+  top: 24px;
   left: 0;
   width: 20%;
-  height: 33px;
+  height: 41px;
   z-index: -1;
-  overflow: hidden;
 }
 
 .write-here {
