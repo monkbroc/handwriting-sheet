@@ -25,7 +25,6 @@
   position: relative;
   z-index: 1;
   margin-bottom: 40px;
-  overflow: visible;
   cursor: default;
 }
 .guideline[contenteditable="true"] {
@@ -129,6 +128,13 @@
   margin-bottom: 40px;
 }
 
+@media screen {
+  .sheet {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
 @media print {
   .controls {
     display: none;
@@ -143,10 +149,25 @@
   }
 }
 
-@media screen {
-  .sheet {
-    max-width: 720px;
-    margin: 0 auto;
+@media print and (orientation: landscape) {
+  .guideline.middle {
+    page-break-before: always;
+  }
+
+
+  .guideline {
+    font-size: 150px;
+    height: 120px;
+    line-height: 120px;
+    margin-bottom: 60px;
+  }
+  .guideline:before {
+    top: 43px;
+    height: 64px;
+  }
+
+  .guideline.second-page:empty {
+    display:none;
   }
 }
 
