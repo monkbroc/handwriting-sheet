@@ -125,17 +125,18 @@ $(document).ready(function() {
       this.$el.toggleClass("single-line-mode", this.state.singleLine());
 
       var mode = this.state.get('mode');
+      var $active = $(document.activeElement);
       switch(mode) {
         case 'singleLine':
           var text = lines[0];
           this.$firstLine.attr('contenteditable', true);
           this.$otherLines.attr('contenteditable', false);
-          this.$guidelines.html(text);
+          this.$guidelines.not($active).html(text);
           break;
         case 'multiLine':
           this.$guidelines.attr('contenteditable', true);
           this.$guidelines.each(function(line) {
-            $(this).html(lines[line] || '');
+            $(this).not($active).html(lines[line] || '');
           });
           break;
       }
