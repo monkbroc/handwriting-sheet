@@ -68,7 +68,10 @@ $(document).ready(function() {
     render: function() {
       this.$wideSpacing.prop('checked', this.state.get('wideSpacing'));
       this.$allCaps.prop('checked', this.state.get('allCaps'));
-      this.$mode.first('[value="' + this.state.get('mode') + '"]').prop('checked', true);
+      var mode = this.state.get('mode');
+      this.$mode.filter(function(index, element) {
+        return $(element).val() == mode;
+      }).prop('checked', true);
 
       return this;
     },
@@ -123,25 +126,14 @@ $(document).ready(function() {
           this.$firstLine.attr('contenteditable', true);
           this.$otherLines.attr('contenteditable', false);
           this.$guidelines.html(text);
-
-          this.showWriteHere(this.$firstLine);
-          this.hideWriteHere(this.$otherLines);
           break;
         case 'multiLine':
           this.$guidelines.attr('contenteditable', true);
           this.$guidelines.each(function(line) {
             $(this).html(lines[line] || '');
           });
-
-          this.showWriteHere(this.$guidelines);
           break;
       }
-    },
-
-    showWriteHere: function($el) {
-    },
-
-    hideWriteHere: function($el) {
     },
   });
 

@@ -115,7 +115,7 @@ body {
 	margin-top: -16px;
 }
 
-.controls, .credits {
+.web-ui {
   display: block;
   margin: 20px auto 30px auto;
   max-width: 700px;
@@ -183,7 +183,7 @@ label {
 }
 
 @media print {
-  .controls, .credits {
+  .web-ui {
     display: none;
   }
 
@@ -197,11 +197,6 @@ label {
 }
 
 @media print and (orientation: landscape) {
-  .guideline.middle {
-    page-break-before: always;
-  }
-
-
   .guideline {
     font-size: 150px;
     height: 120px;
@@ -213,7 +208,7 @@ label {
     height: 64px;
   }
 
-  .guideline.second-page:empty {
+  .guideline.second-page {
     display:none;
   }
 }
