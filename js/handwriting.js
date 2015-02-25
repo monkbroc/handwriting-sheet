@@ -97,6 +97,11 @@ $(document).ready(function() {
 
     events: {
       "input .guideline": "updateLine",
+      // Events for old IE
+      "keyup .guideline": "updateLine",
+      "cut .guideline": "updateLine",
+      "blur .guideline": "updateLine",
+      "paste .guideline": "updateLine",
     },
 
     updateLine: function(event) {

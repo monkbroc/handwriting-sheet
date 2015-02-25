@@ -1,4 +1,4 @@
 Print handwriting sheets for kids
 #################################
 
-Go to http://monkbroc.github.io/handwriting-sheet and start printing!
+Go to http://www.julienvanier.com/handwriting-sheet/ and start printing!
