@@ -52,29 +52,29 @@ body {
 
 .write-here {
   position: absolute;
-  left: -180px;
-  width: 140px;
-  top: -32px;
+  left: -140px;
+  width: 120px;
+  top: -2px;
 }
 .write-here.or {
   height: 50px;
-  top: 109px;
+  top: 139px;
 }
 .write-here.on {
   height: 50px;
-  top: 230px;
+  top: 260px;
 }
 .write-here.any {
   height: 50px;
-  top: 352px;
+  top: 382px;
 }
 .write-here.other {
   height: 50px;
-  top: 472px;
+  top: 502px;
 }
 .write-here.line {
   height: 50px;
-  top: 594px;
+  top: 624px;
 }
 .sheet.single-line-mode .write-here.or,
 .sheet.single-line-mode .write-here.on,
@@ -85,11 +85,12 @@ body {
   display: none;
 }
 .write-here .instructions {
-  padding: 20px;
-  font-size: 35px;
+  padding: 15px;
+  font-size: 30px;
   font-weight: bold;
   color: rgba(255,255,255,.9);
   text-align: center;
+  line-height: 1.2;
 }
 
 .arrow_box {
@@ -110,8 +111,8 @@ body {
 
 .arrow_box:before {
 	border-left-color: #3498DB;
-	border-width: 26px;
-	margin-top: -26px;
+	border-width: 16px;
+	margin-top: -16px;
 }
 
 .controls, .credits {
@@ -150,6 +151,9 @@ body {
 .form-control {
   display: inline;
   width: auto;
+}
+label {
+  cursor: pointer;
 }
 
 .controls .checkbox,

@@ -38,13 +38,13 @@ $(document).ready(function() {
        _.extend(this, options);
       this.$wideSpacing = this.$("#wide-spacing");
       this.$allCaps = this.$("#all-caps");
-      this.$mode = this.$("#mode");
+      this.$mode = this.$('input[name="mode"]');
     },
 
     events: {
       'change #wide-spacing': 'wideSpacingChanged',
       'change #all-caps': 'allCapsChanged',
-      'change #mode': 'modeChanged',
+      'change [name="mode"]': 'modeChanged',
       'click #print': 'print',
     },
 
@@ -59,14 +59,16 @@ $(document).ready(function() {
     },
 
     modeChanged: function(event) {
-      var val = this.$mode.val();
+      var val = this.$mode.filter(function(index, element) {
+        return element.checked;
+      }).val();
       this.state.save('mode', val);
     },
 
     render: function() {
       this.$wideSpacing.prop('checked', this.state.get('wideSpacing'));
       this.$allCaps.prop('checked', this.state.get('allCaps'));
-      this.$mode.val(this.state.get('mode'));
+      this.$mode.first('[value="' + this.state.get('mode') + '"]').prop('checked', true);
 
       return this;
     },
