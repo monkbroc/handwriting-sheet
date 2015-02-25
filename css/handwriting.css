@@ -1,3 +1,6 @@
+body {
+}
+
 #mfPreviewBar {
   display: none;
 }
@@ -17,6 +20,7 @@
 
 .guideline {
   font-family: 'KG Primary Dots', sans-serif;
+  color: black;
   text-align: center;
   border-top: 1px solid #333;
   font-size: 100px;
@@ -26,6 +30,7 @@
   z-index: 1;
   margin-bottom: 40px;
   cursor: default;
+  background-color: white;
 }
 .guideline[contenteditable="true"] {
   cursor: text;
@@ -83,18 +88,16 @@
   padding: 20px;
   font-size: 35px;
   font-weight: bold;
-  font-family: Helvetica, Arial, sans-serif;
-  color: #ddf8c6;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  color: rgba(255,255,255,.9);
   text-align: center;
 }
 
 .arrow_box {
 	position: relative;
-	background: #88b7d5;
-	border: 4px solid #c2e1f5;
+	background: #3498DB;
+	border-radius: 12px;
 }
-.arrow_box:after, .arrow_box:before {
+.arrow_box:before {
 	left: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -105,38 +108,78 @@
 	pointer-events: none;
 }
 
-.arrow_box:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-left-color: #88b7d5;
-	border-width: 20px;
-	margin-top: -20px;
-}
 .arrow_box:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-left-color: #c2e1f5;
+	border-left-color: #3498DB;
 	border-width: 26px;
 	margin-top: -26px;
 }
 
-
-.main-input {
-  font-size: 30px;
+.controls, .credits {
+  display: block;
+  margin: 20px auto 30px auto;
+  max-width: 700px;
+}
+.jumbo {
+  background-color: #ECF0F1;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.headline {
+  text-align: center;
+}
+.lead {
+  text-align: center;
 }
 
-.controls {
-  text-align: center;
-  margin-bottom: 40px;
+.main-logo {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 0 20px 20px 0; 
+}
+.btn-inline {
+  margin-left: 10px;
+}
+.btn .icon-left {
+  margin-right: 8px;
+}
+.checkbox {
+  display: inline;
+}
+.form-control {
+  display: inline;
+  width: auto;
+}
+
+.controls .checkbox,
+.controls .radio {
+  margin: 10px;
+}
+
+.credits p {
+  margin: 5px;
+  text-align: right;
+  color: #95A5A6;
+  font-size: 14px;
+}
+
+.heart {
+  color: #E74C3C;
+  margin: 0 3px;
 }
 
 @media screen {
   .sheet {
     max-width: 720px;
     margin: 0 auto;
+  
+    padding: 20px;
   }
 }
 
 @media print {
-  .controls {
+  .controls, .credits {
     display: none;
   }
 

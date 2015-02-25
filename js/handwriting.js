@@ -6,7 +6,6 @@ $(document).ready(function() {
     defaults: {
       wideSpacing: true,
       allCaps: true,
-      repeatedLines: 6,
       mode: 'singleLine',
     },
 
@@ -39,15 +38,14 @@ $(document).ready(function() {
        _.extend(this, options);
       this.$wideSpacing = this.$("#wide-spacing");
       this.$allCaps = this.$("#all-caps");
-      this.$repeatedLines = this.$("#repeated-lines");
       this.$mode = this.$("#mode");
     },
 
     events: {
       'change #wide-spacing': 'wideSpacingChanged',
       'change #all-caps': 'allCapsChanged',
-      'change #repeated-lines': 'repeatedLinesChanged',
       'change #mode': 'modeChanged',
+      'click #print': 'print',
     },
 
     wideSpacingChanged: function(event) {
@@ -60,11 +58,6 @@ $(document).ready(function() {
       this.state.save('allCaps', val);
     },
 
-    repeatedLinesChanged: function(event) {
-      var val = this.$repeatedLines.val();
-      this.state.save('repeatedLines', val);
-    },
-
     modeChanged: function(event) {
       var val = this.$mode.val();
       this.state.save('mode', val);
@@ -73,11 +66,13 @@ $(document).ready(function() {
     render: function() {
       this.$wideSpacing.prop('checked', this.state.get('wideSpacing'));
       this.$allCaps.prop('checked', this.state.get('allCaps'));
-      this.$repeatedLines.val(this.state.get('repeatedLines'));
-      this.$repeatedLines.show(this.state.singleLine());
       this.$mode.val(this.state.get('mode'));
 
       return this;
+    },
+
+    print: function() {
+      window.print();
     },
   });
   
@@ -123,12 +118,9 @@ $(document).ready(function() {
       switch(mode) {
         case 'singleLine':
           var text = lines[0];
-          var repeatedLines = this.state.get('repeatedLines');
           this.$firstLine.attr('contenteditable', true);
           this.$otherLines.attr('contenteditable', false);
-          this.$guidelines.each(function(line) {
-            $(this).html(line < repeatedLines ? text : '');
-          });
+          this.$guidelines.html(text);
 
           this.showWriteHere(this.$firstLine);
           this.hideWriteHere(this.$otherLines);
@@ -172,6 +164,10 @@ $(document).ready(function() {
   controls.render();
   sheet.render();
 
+  /* === Widgets === */
+
+ $('[data-toggle="check"]').radiocheck();
+ $('[data-toggle="radio"]').radiocheck();
 });
 
 // vim: sw=2 expandtab
