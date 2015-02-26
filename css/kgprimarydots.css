@@ -1,0 +1,12 @@
+/* KG Primary Dots is a font by Kimberly Geswein http://www.kimberlygeswein.com/ */
+@font-face {
+    font-family: 'KG Primary Dots';
+    src: url('../fonts/kgprimarydots/KGPrimaryDots-webfont.eot');
+    src: url('../fonts/kgprimarydots/KGPrimaryDots-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/kgprimarydots/KGPrimaryDots-webfont.woff2') format('woff2'),
+         url('../fonts/kgprimarydots/KGPrimaryDots-webfont.woff') format('woff'),
+         url('../fonts/kgprimarydots/KGPrimaryDots-webfont.ttf') format('truetype'),
+         url('../fonts/kgprimarydots/KGPrimaryDots-webfont.svg#kg_primary_dotsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
