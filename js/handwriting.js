@@ -23,7 +23,7 @@ $(document).ready(function() {
 
   var PracticeText = Backbone.Model.extend({
     defaults: {
-      lines: ['ABC'],
+      lines: ['abc'],
     },
 
     id: 'singleton',
@@ -166,8 +166,43 @@ $(document).ready(function() {
 
   /* === Widgets === */
 
- $('[data-toggle="check"]').radiocheck();
- $('[data-toggle="radio"]').radiocheck();
+  $('[data-toggle="check"]').radiocheck();
+  $('[data-toggle="radio"]').radiocheck();
+
+  /* === Translation === */
+  var dictionary = {
+    "Handwriting sheet": { fr: "Page d'écriture" },
+    "Enter some text below then hit": { fr: "Écrivez sur les lignes plus bas et appuyez sur" },
+    "Print!": { fr: "Imprimer!" },
+    "Same word on every line": { fr: "Toutes les lignes pareilles" },
+    "Wide spacing between letters": { fr: "Beaucoup d'espace entre les lettres" },
+    "Each line is different": { fr: "Chaque ligne différente" },
+    "All caps": { fr: "Tout en majuscules" },
+    "Write here!": { fr: "Écrivez ici!" },
+    "Or": { fr: "Ou" },
+    "on": { fr: "sur" },
+    "any": { fr: "une" },
+    "other": { fr: "autre" },
+    "line": { fr: "ligne" },
+    "Hint: If you print in <strong>landscape</strong>, only the first <strong>3 lines</strong> will be printed with a larger font.":
+    { fr: "Si vous imprimez en <strong>paysage</strong>, seulement les <strong>3 premières lignes</strong> seront imprimées en plus gros charactères." },
+    "Made with": { fr: "Fait avec" },
+    "love": { fr: "amour" },
+    "by": { fr: "par" },
+    "Font by": { fr: "Police de charactère par" },
+    "This software is free and open source.": { fr: "Ce logiciel est gratuit et ouvert." }
+  };
+
+  var language = (navigator.language || 'en').substr(0, 2)
+  $("s").each(function() {
+    var original = $(this).html();
+    var translation = dictionary[original];
+    if(!translation && window.location.host != "www.julienvanier.com") {
+      alert("Missing translation: " + original);
+    } else {
+      $(this).html(translation[language] || original);
+    }
+  });
 });
 
 // vim: sw=2 expandtab

@@ -207,5 +207,9 @@ label {
   }
 }
 
+s {
+  text-decoration: none;
+}
+
 /* vim: sw=2 expandtab
  */

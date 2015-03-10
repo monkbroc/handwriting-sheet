@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>)
     <title>Handwriting sheet</title>
     <link href='css/vendor/bootstrap.min.css' rel='stylesheet' type='text/css'>
     <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
@@ -9,62 +10,61 @@
     <link href='css/handwriting.css' rel='stylesheet' type='text/css'>
 
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
-    <!-- <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script> -->
     <!-- TODO: add -min.js for production -->
     <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.1/underscore.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js'></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage.js'></script>
 
     <script src='js/flat-ui.js'></script>
-    <script src='js/handwriting.js'></script>
+    <script src='js/handwriting.js' charset="utf-8"></script>
   </head>
   <body>
     <section class="web-ui controls">
       <div class="jumbo">
-        <h1 class="headline"><img src="img/Pencils.png" class="main-logo">Handwriting sheet</h1>
-        <p class="lead">Enter some text below then hit <button class="btn
-        btn-lg btn-primary btn-inline" id="print"><span class="lead"><i class="fa fa-print icon-left"></i> Print!</span></button></p>
+        <h1 class="headline"><img src="img/Pencils.png" class="main-logo"><s>Handwriting sheet</s></h1>
+        <p class="lead"><s>Enter some text below then hit</s> <button class="btn
+          btn-lg btn-primary btn-inline" id="print"><span class="lead"><i class="fa fa-print icon-left"></i> <s>Print!</s></span></button></p>
       </div>
       <div class="row">
         <div class="col-xs-5 col-xs-offset-2">
-          <label class="radio"><input type="radio" data-toggle="radio" name="mode" value="singleLine" checked="checked">Same word on every line</label>
+          <label class="radio"><input type="radio" data-toggle="radio" name="mode" value="singleLine" checked="checked"><s>Same word on every line</s></label>
         </div>
         <div class="col-xs-5">
-          <label class="checkbox" for="wide-spacing"><input type="checkbox" id="wide-spacing" data-toggle="check">Wide spacing between letters</label>
+          <label class="checkbox" for="wide-spacing"><input type="checkbox" id="wide-spacing" data-toggle="check"><s>Wide spacing between letters</s></label>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-5 col-xs-offset-2">
-          <label class="radio"><input type="radio" data-toggle="radio" name="mode" value="multiLine">Each line is different</label>
+          <label class="radio"><input type="radio" data-toggle="radio" name="mode" value="multiLine"><s>Each line is different</s></label>
         </div>
         <div class="col-xs-5">
-          <label class="checkbox" for="all-caps"><input type="checkbox" id="all-caps" data-toggle="check">All caps</label>
+          <label class="checkbox" for="all-caps"><input type="checkbox" id="all-caps" data-toggle="check"><s>All caps</s></label>
         </div>
       </div>
     </section>
     <section class="sheet">
-      <div class="write-here first"><div class="arrow_box"><div class="instructions">Write here!</div></div></div>
-      <div class="guideline" contenteditable="true"></div>
-      <div class="write-here or"><div class="arrow_box"><div class="instructions">Or</div></div></div>
-      <div class="guideline" contenteditable="true"></div>
-      <div class="write-here on"><div class="arrow_box"><div class="instructions">on</div></div></div>
-      <div class="guideline" contenteditable="true"></div>
-      <div class="write-here any"><div class="arrow_box"><div class="instructions">any</div></div></div>
-      <div class="guideline second-page" contenteditable="true"></div>
-      <div class="write-here other"><div class="arrow_box"><div class="instructions">other</div></div></div>
-      <div class="guideline second-page" contenteditable="true"></div>
-      <div class="write-here line"><div class="arrow_box"><div class="instructions">line</div></div></div>
-      <div class="guideline second-page" contenteditable="true"></div>
+      <div class="write-here first"><div class="arrow_box"><div class="instructions"><s>Write here!</s></div></div></div>
+      <div class="guideline" contenteditable="true" spellcheck="false"></div>
+      <div class="write-here or"><div class="arrow_box"><div class="instructions"><s>Or</s></div></div></div>
+      <div class="guideline" contenteditable="true" spellcheck="false"></div>
+      <div class="write-here on"><div class="arrow_box"><div class="instructions"><s>on</s></div></div></div>
+      <div class="guideline" contenteditable="true" spellcheck="false"></div>
+      <div class="write-here any"><div class="arrow_box"><div class="instructions"><s>any</s></div></div></div>
+      <div class="guideline second-page" contenteditable="true" spellcheck="false"></div>
+      <div class="write-here other"><div class="arrow_box"><div class="instructions"><s>other</s></div></div></div>
+      <div class="guideline second-page" contenteditable="true" spellcheck="false"></div>
+      <div class="write-here line"><div class="arrow_box"><div class="instructions"><s>line</s></div></div></div>
+      <div class="guideline second-page" contenteditable="true" spellcheck="false"></div>
     </section>
 
     <section class="web-ui">
-    <p>Hint: If you print in <strong>landscape</strong>, only the first <strong>3 lines</strong> will be printed with a larger font.</p>
+    <p><s>Hint: If you print in <strong>landscape</strong>, only the first <strong>3 lines</strong> will be printed with a larger font.</s></p>
     </section>
     <section class="web-ui credits">
-      <p>Made with <i class="heart fa fa-heart"><span class="sr-only">love</span></i> by
+      <p><s>Made with</s> <i class="heart fa fa-heart"><span class="sr-only"><s>love</s></span></i> <s>by</s>
       <a href="http://www.julienvanier.com">Julien Vanier</a>.</p>
-      <p><a href="https://github.com/monkbroc/handwriting-sheet">This
-        software is open source.</a></p>
+      <p><s>Font by</s> <a href="http://www.kimberlygeswein.com/">Kimerly Geswein</a></p>
+      <p><a href="https://github.com/monkbroc/handwriting-sheet"><s>This software is free and open source.</s></a></p>
     </section>
 
 	<!-- Google Analytics -->
