@@ -172,7 +172,7 @@ $(document).ready(function() {
   /* === Translation === */
   var dictionary = {
     "Handwriting sheet": { fr: "Page d'écriture" },
-    "Enter some text below then hit": { fr: "Écrivez sur les lignes plus bas et appuyez sur" },
+    "Write on the lines below then hit": { fr: "Écrivez sur les lignes plus bas et appuyez sur" },
     "Print!": { fr: "Imprimer!" },
     "Same word on every line": { fr: "Toutes les lignes pareilles" },
     "Wide spacing between letters": { fr: "Beaucoup d'espace entre les lettres" },
