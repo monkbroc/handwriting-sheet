@@ -114,6 +114,8 @@ $(document).ready(function() {
       var lines = _.clone(this.model.get('lines'));
       lines[lineNum] = $el.html();
       this.model.save('lines', lines);
+      // Analytics
+      typeText();
     },
 
     render: function() {
@@ -168,6 +170,33 @@ $(document).ready(function() {
 
   $('[data-toggle="check"]').radiocheck();
   $('[data-toggle="radio"]').radiocheck();
+
+  /* == Analytics === */
+  var typeDone = false;
+  var typeText = function() {
+   if(!typeDone) {
+      typeDone = true;
+      _gaq.push(['_trackEvent', 'Sheet', 'Type']);
+    }
+  };
+  var printDone = false;
+  var afterPrint = function() {
+    if(!printDone) {
+      printDone = true;
+      _gaq.push(['_trackEvent', 'Sheet', 'Print']);
+    }
+  };
+
+  if (window.matchMedia) {
+    var mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener(function(mql) {
+      if (!mql.matches) {
+        afterPrint();
+      }
+    });
+  }
+
+  window.onafterprint = afterPrint;
 
   /* === Translation === */
   var dictionary = {
