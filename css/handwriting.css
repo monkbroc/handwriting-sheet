@@ -190,7 +190,7 @@ label {
   }
 }
 
-@media print and (orientation: landscape) {
+@media print and (orientation: landscape) and (min-width: 600px) {
   .guideline {
     font-size: 150px;
     height: 120px;
