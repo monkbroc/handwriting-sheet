@@ -39,12 +39,14 @@ $(document).ready(function() {
        _.extend(this, options);
       this.$wideSpacing = this.$("#wide-spacing");
       this.$allCaps = this.$("#all-caps");
+      this.$largeFont = this.$("#large-font");
       this.$mode = this.$('input[name="mode"]');
     },
 
     events: {
       'change #wide-spacing': 'wideSpacingChanged',
       'change #all-caps': 'allCapsChanged',
+      'change #large-font': 'largeFontChanged',
       'change [name="mode"]': 'modeChanged',
       'click #print': 'print',
     },
@@ -58,6 +60,10 @@ $(document).ready(function() {
       var val = this.$allCaps.prop('checked');
       this.state.save('allCaps', val);
     },
+    largeFontChanged: function(event) {
+      var val = this.$largeFont.prop('checked');
+      this.state.save('largeFont', val);
+    },
 
     modeChanged: function(event) {
       var val = this.$mode.filter(function(index, element) {
@@ -69,6 +75,7 @@ $(document).ready(function() {
     render: function() {
       this.$wideSpacing.prop('checked', this.state.get('wideSpacing'));
       this.$allCaps.prop('checked', this.state.get('allCaps'));
+      this.$largeFont.prop('checked', this.state.get('largeFont'));
       var mode = this.state.get('mode');
       this.$mode.filter(function(index, element) {
         return $(element).val() == mode;
@@ -122,6 +129,7 @@ $(document).ready(function() {
     render: function() {
       this.$el.toggleClass("all-caps", this.state.get('allCaps'));
       this.$el.toggleClass("wide-spacing", this.state.get('wideSpacing'));
+      this.$el.toggleClass("large-font", this.state.get('largeFont'));
 
       var lines = this.model.get('lines');
 
