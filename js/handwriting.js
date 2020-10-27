@@ -6,6 +6,7 @@ $(document).ready(function() {
     defaults: {
       wideSpacing: true,
       allCaps: true,
+      largeFont: true,
       mode: 'singleLine',
     },
 
@@ -207,6 +208,7 @@ $(document).ready(function() {
     "Wide spacing between letters": { fr: "Beaucoup d'espace entre les lettres" },
     "Each line is different": { fr: "Chaque ligne différente" },
     "All caps": { fr: "Tout en majuscules" },
+    "Large font": { fr: "Grosse lettres" },
     "Write here!": { fr: "Écrivez ici!" },
     "Or": { fr: "Ou" },
     "on": { fr: "sur" },
